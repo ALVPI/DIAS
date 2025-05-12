@@ -34,9 +34,6 @@ app.post('/chat', async (req, res) => {
 });
 
 // Inicia el servidor
-app.listen(10000, '0.0.0.0', () => {
-  console.log('Servidor corriendo en http://localhost:10000');
-});
-app.get('/', (req, res) => {
-  res.send('Backend de DIAS está funcionando. Haz peticiones POST a /chat');
+app.listen(process.env.PORT || 10000, () => {
+  console.log('Servidor backend escuchando');
 });
