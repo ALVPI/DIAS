@@ -1,36 +1,39 @@
-const API_KEY = 'YOUR_OPENAI_API_KEY'; // Replace with your actual API key
+const BACKEND_URL = 'https://dias-backend.onrender.com/chat';
 
-// Función para cambiar entre el modo claro y oscuro
+// Modo claro/oscuro
 document.getElementById('toggle-mode').addEventListener('click', function(event) {
     document.body.classList.toggle('dark-mode');
     this.textContent = document.body.classList.contains('dark-mode') ? 'Modo Claro' : 'Modo Oscuro';
-    event.stopPropagation(); // Evita que el evento de clic se propague
+    event.stopPropagation();
 });
 
-// Función para enviar el mensaje del usuario
-document.getElementById('send-button').addEventListener('click', function() {
-    const userInput = document.getElementById('user-input').value.trim();
+// Enviar mensaje con botón
+document.getElementById('send-button').addEventListener('click', () => {
+    const input = document.getElementById('user-input');
+    const userInput = input.value.trim();
     if (userInput) {
         sendMessage(userInput);
-        document.getElementById('user-input').value = '';
+        input.value = '';
     }
 });
 
-// Evento para enviar el mensaje al pulsar Enter
-document.getElementById('user-input').addEventListener('keypress', function(event) {
+// Enviar con Enter
+document.getElementById('user-input').addEventListener('keypress', (event) => {
     if (event.key === 'Enter') {
-        const userInput = document.getElementById('user-input').value.trim();
+        const input = document.getElementById('user-input');
+        const userInput = input.value.trim();
         if (userInput) {
             sendMessage(userInput);
-            document.getElementById('user-input').value = '';
+            input.value = '';
         }
-        event.preventDefault(); // Evita que se envíe el formulario
+        event.preventDefault();
     }
 });
 
-// Función para enviar el mensaje del usuario y mostrar el indicador de escritura
 async function sendMessage(message) {
     const chatMessages = document.getElementById('chat-messages');
+    
+    // Muestra mensaje del usuario
     const userMessageElement = document.createElement('div');
     userMessageElement.classList.add('message', 'user-message');
     userMessageElement.textContent = message;
@@ -40,43 +43,35 @@ async function sendMessage(message) {
     showTypingIndicator();
 
     try {
-        const response = await fetch('https://api.openai.com/v1/completions', {
+        const response = await fetch(BACKEND_URL, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${API_KEY}`
-            },
-            body: JSON.stringify({
-                model: "text-davinci-003",
-                prompt: message,
-                max_tokens: 2048,
-                temperature: 0.5
-            })
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message })
         });
 
         const data = await response.json();
-        const botMessage = data.choices[0].text.trim();
+        hideTypingIndicator();
 
-        hideTypingIndicator();
-        receiveMessage(botMessage);
+        if (data.reply) {
+            receiveMessage(data.reply);
+        } else {
+            receiveMessage('Lo siento, no he podido responder.');
+        }
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Error al contactar con el servidor:', error);
         hideTypingIndicator();
-        receiveMessage('Lo siento, no pude procesar tu solicitud.');
+        receiveMessage('Ha ocurrido un error. Inténtalo más tarde.');
     }
 }
 
-// Función para mostrar el indicador de escritura
 function showTypingIndicator() {
     document.getElementById('typing-indicator').style.display = 'flex';
 }
 
-// Función para ocultar el indicador de escritura
 function hideTypingIndicator() {
     document.getElementById('typing-indicator').style.display = 'none';
 }
 
-// Función para recibir la respuesta del bot
 function receiveMessage(message) {
     const chatMessages = document.getElementById('chat-messages');
     const botMessageElement = document.createElement('div');
