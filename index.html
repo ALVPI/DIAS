@@ -258,7 +258,7 @@
         <button id="toggle-mode">Modo Oscuro</button>
         
         <div class="chat-container">
-            <div class="chat-header">
+            div class="chat-header">
                 Conversación con el Asistente
             </div>
             <div class="chat-messages" id="chat-messages">
@@ -285,9 +285,10 @@
 
     <script>
         // Función para cambiar entre el modo claro y oscuro
-        document.getElementById('toggle-mode').addEventListener('click', function() {
+        document.getElementById('toggle-mode').addEventListener('click', function(event) {
             document.body.classList.toggle('dark-mode');
             this.textContent = document.body.classList.contains('dark-mode') ? 'Modo Claro' : 'Modo Oscuro';
+            event.stopPropagation(); // Evita que el evento de clic se propague
         });
 
         // Función para enviar el mensaje del usuario
