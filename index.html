@@ -258,7 +258,7 @@
         <button id="toggle-mode">Modo Oscuro</button>
         
         <div class="chat-container">
-            div class="chat-header">
+            <div class="chat-header">
                 Conversación con el Asistente
             </div>
             <div class="chat-messages" id="chat-messages">
@@ -297,6 +297,18 @@
             if (userInput) {
                 sendMessage(userInput);
                 document.getElementById('user-input').value = '';
+            }
+        });
+
+        // Evento para enviar el mensaje al pulsar Enter
+        document.getElementById('user-input').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                const userInput = document.getElementById('user-input').value.trim();
+                if (userInput) {
+                    sendMessage(userInput);
+                    document.getElementById('user-input').value = '';
+                }
+                event.preventDefault(); // Evita que se envíe el formulario
             }
         });
 
