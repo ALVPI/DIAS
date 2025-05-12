@@ -1,4 +1,4 @@
-const BACKEND_URL = 'https://dias-backend.onrender.com/chat';
+const BACKEND_URL = 'https://dias-backend-rmrm.onrender.com';
 
 // Modo claro/oscuro
 document.getElementById('toggle-mode').addEventListener('click', function(event) {
