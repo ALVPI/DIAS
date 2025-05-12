@@ -7,144 +7,245 @@
     <style>
         /* Estilos generales para la página */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Define la fuente para toda la página */
-            margin: 0;                                                    /* Elimina los márgenes predeterminados */
-            padding: 0;                                                   /* Elimina el relleno predeterminado */
-            background-color: #f5f5f5;                                    /* Color de fondo gris claro */
-            color: #333;                                                  /* Color de texto principal */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
         }
-        
+
         /* Contenedor principal que limita el ancho y centra el contenido */
         .container {
-            max-width: 800px;                                            /* Ancho máximo del contenedor */
-            margin: 0 auto;                                              /* Centra el contenedor horizontalmente */
-            padding: 20px;                                               /* Espacio interior */
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
         }
-        
+
         /* Contenedor del chat */
         .chat-container {
-            background-color: white;                                     /* Fondo blanco para el área de chat */
-            border-radius: 10px;                                         /* Esquinas redondeadas */
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);                   /* Sombra sutil */
-            overflow: hidden;                                            /* Oculta contenido que desborda */
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
         }
-        
+
         /* Encabezado del chat */
         .chat-header {
-            background-color: #4a6fa5;                                   /* Color de fondo azul */
-            color: white;                                                /* Texto en color blanco */
-            padding: 15px 20px;                                          /* Relleno interior */
-            font-size: 18px;                                             /* Tamaño de texto */
-            font-weight: bold;                                           /* Texto en negrita */
+            background-color: #4a6fa5;
+            color: white;
+            padding: 15px 20px;
+            font-size: 18px;
+            font-weight: bold;
         }
-        
+
         /* Área donde se muestran los mensajes */
         .chat-messages {
-            height: 400px;                                               /* Altura fija del área de mensajes */
-            overflow-y: auto;                                            /* Barra de desplazamiento vertical automática */
-            padding: 20px;                                               /* Relleno interior */
-            display: flex;                                               /* Usa flexbox para organizar mensajes */
-            flex-direction: column;                                      /* Organiza elementos en columna */
+            height: 400px;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
         }
-        
+
         /* Estilo común para todos los mensajes */
         .message {
-            margin-bottom: 15px;                                         /* Espacio entre mensajes */
-            max-width: 80%;                                              /* Ancho máximo del mensaje */
-            padding: 10px 15px;                                          /* Relleno interior */
-            border-radius: 18px;                                         /* Esquinas muy redondeadas (estilo burbuja) */
-            line-height: 1.4;                                            /* Espaciado entre líneas */
+            margin-bottom: 15px;
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 18px;
+            line-height: 1.4;
         }
-        
+
         /* Estilo específico para mensajes del usuario */
         .user-message {
-            align-self: flex-end;                                        /* Alinea a la derecha */
-            background-color: #e3f2fd;                                   /* Fondo azul claro */
+            align-self: flex-end;
+            background-color: #e3f2fd;
         }
-        
+
         /* Estilo específico para mensajes del bot */
         .bot-message {
-            align-self: flex-start;                                      /* Alinea a la izquierda */
-            background-color: #f1f1f1;                                   /* Fondo gris claro */
+            align-self: flex-start;
+            background-color: #f1f1f1;
         }
-        
+
         /* Área de entrada de texto */
         .input-area {
-            display: flex;                                               /* Usa flexbox para organizar elementos */
-            padding: 15px;                                               /* Relleno interior */
-            background-color: #f9f9f9;                                   /* Fondo gris muy claro */
-            border-top: 1px solid #eee;                                  /* Borde superior sutil */
+            display: flex;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-top: 1px solid #eee;
         }
-        
+
         /* Campo de entrada de texto */
         #user-input {
-            flex-grow: 1;                                                /* Ocupa todo el espacio disponible */
-            padding: 12px 15px;                                          /* Relleno interior */
-            border: 1px solid #ddd;                                      /* Borde gris claro */
-            border-radius: 20px;                                         /* Esquinas muy redondeadas */
-            outline: none;                                               /* Elimina el contorno al enfocar */
-            font-size: 15px;                                             /* Tamaño de texto */
+            flex-grow: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            outline: none;
+            font-size: 15px;
         }
-        
+
         /* Botón de enviar */
         #send-button {
-            background-color: #4a6fa5;                                   /* Fondo azul (igual al encabezado) */
-            color: white;                                                /* Texto en color blanco */
-            border: none;                                                /* Sin borde */
-            border-radius: 20px;                                         /* Esquinas muy redondeadas */
-            padding: 0 20px;                                             /* Relleno interior horizontal */
-            margin-left: 10px;                                           /* Margen izquierdo */
-            cursor: pointer;                                             /* Cursor de mano al pasar por encima */
-            font-size: 15px;                                             /* Tamaño de texto */
-            transition: background-color 0.3s;                           /* Transición suave del color de fondo */
+            background-color: #4a6fa5;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 0 20px;
+            margin-left: 10px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: background-color 0.3s;
         }
-        
+
         /* Estilo al pasar el cursor sobre el botón */
         #send-button:hover {
-            background-color: #3a5a80;                                   /* Azul más oscuro */
+            background-color: #3a5a80;
         }
-        
+
         /* Indicador de escritura (los puntos animados) */
         .typing-indicator {
-            display: none;                                               /* Oculto por defecto */
-            align-self: flex-start;                                      /* Alinea a la izquierda */
-            background-color: #f1f1f1;                                   /* Mismo fondo que mensajes del bot */
-            padding: 10px 15px;                                          /* Relleno interior */
-            border-radius: 18px;                                         /* Esquinas redondeadas */
-            margin-bottom: 15px;                                         /* Espacio inferior */
+            display: none;
+            align-self: flex-start;
+            background-color: #f1f1f1;
+            padding: 10px 15px;
+            border-radius: 18px;
+            margin-bottom: 15px;
         }
-        
+
         /* Contenedor de los puntos animados */
         .typing-dots {
-            display: inline-block;                                       /* Comportamiento en línea pero con propiedades de bloque */
+            display: inline-block;
         }
-        
+
         /* Cada punto individual */
         .typing-dot {
-            display: inline-block;                                       /* Comportamiento en línea pero con propiedades de bloque */
-            width: 8px;                                                  /* Ancho del punto */
-            height: 8px;                                                 /* Altura del punto */
-            border-radius: 50%;                                          /* Forma circular */
-            background-color: #666;                                      /* Color gris */
-            margin-right: 3px;                                           /* Espacio entre puntos */
-            animation: typing-dot-pulse 1.5s infinite ease-in-out;       /* Animación pulsante */
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #666;
+            margin-right: 3px;
+            animation: typing-dot-pulse 1.5s infinite ease-in-out;
         }
-        
+
         /* Retardo de animación para el segundo punto */
         .typing-dot:nth-child(2) {
-            animation-delay: 0.2s;                                       /* Retrasa la animación */
+            animation-delay: 0.2s;
         }
-        
+
         /* Retardo de animación para el tercer punto y sin margen derecho */
         .typing-dot:nth-child(3) {
-            animation-delay: 0.4s;                                       /* Retrasa la animación más */
-            margin-right: 0;                                             /* Elimina el margen derecho */
+            animation-delay: 0.4s;
+            margin-right: 0;
         }
-        
+
         /* Definición de la animación para los puntos */
         @keyframes typing-dot-pulse {
-            0%, 60%, 100% { transform: translateY(0); }                  /* Posición inicial y final */
-            30% { transform: translateY(-5px); }                         /* Salta hacia arriba */
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
+        }
+
+        /* Estilos para el modo oscuro */
+        body.dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        body.dark-mode .container {
+            background-color: #121212;
+        }
+
+        body.dark-mode .chat-container {
+            background-color: #181818;
+        }
+
+        body.dark-mode .chat-header {
+            background-color: #2a2a2a;
+        }
+
+        body.dark-mode .chat-messages {
+            background-color: #181818;
+        }
+
+        body.dark-mode .message {
+            background-color: #2a2a2a;
+            color: #ffffff;
+        }
+
+        body.dark-mode .user-message {
+            background-color: #3a3a3a;
+        }
+
+        body.dark-mode .bot-message {
+            background-color: #2a2a2a;
+        }
+
+        body.dark-mode .input-area {
+            background-color: #181818;
+        }
+
+        body.dark-mode #user-input {
+            background-color: #2a2a2a;
+            color: #ffffff;
+            border: 1px solid #3a3a3a;
+        }
+
+        body.dark-mode #send-button {
+            background-color: #4a6fa5;
+            color: #ffffff;
+        }
+
+        body.dark-mode #send-button:hover {
+            background-color: #3a5a80;
+        }
+
+        body.dark-mode .typing-indicator {
+            background-color: #2a2a2a;
+            color: #ffffff;
+        }
+
+        body.dark-mode .typing-dot {
+            background-color: #666;
+        }
+
+        /* Área de sugerencias */
+        #suggestions {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            max-height: 150px;
+            overflow-y: auto;
+            width: calc(100% - 30px);
+            margin-top: 5px;
+        }
+
+        #suggestions .suggestion {
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+        }
+
+        #suggestions .suggestion:hover {
+            background-color: #f1f1f1;
+        }
+
+        body.dark-mode #suggestions {
+            background-color: #181818;
+            border: 1px solid #3a3a3a;
+        }
+
+        body.dark-mode #suggestions .suggestion {
+            color: #ffffff;
+        }
+
+        body.dark-mode #suggestions .suggestion:hover {
+            background-color: #2a2a2a;
         }
     </style>
 </head>
@@ -152,6 +253,9 @@
     <div class="container">
         <h1>Asistente Virtual</h1>
         <p>Haz cualquier pregunta y nuestro asistente te responderá.</p>
+        
+        <!-- Botón para cambiar el modo -->
+        <button id="toggle-mode">Modo Oscuro</button>
         
         <div class="chat-container">
             <div class="chat-header">
@@ -174,148 +278,64 @@
             <div class="input-area">
                 <input type="text" id="user-input" placeholder="Escribe tu pregunta aquí..." autocomplete="off">
                 <button id="send-button">Enviar</button>
+                <div id="suggestions" class="suggestions"></div>
             </div>
         </div>
     </div>
 
     <script>
-        // Diccionario de respuestas predefinidas basadas en palabras clave
-        // Cuando el mensaje del usuario contiene alguna de estas palabras, se usa la respuesta correspondiente
-        const responses = {
-            'hola': 'Hola, ¿en qué puedo ayudarte?',
-            'ayuda': 'Puedo responder preguntas sobre diversos temas. Solo pregúntame lo que necesites.',
-            'tiempo': 'Lo siento, no tengo acceso a información en tiempo real sobre el clima.',
-            'nombre': 'Soy un asistente virtual creado para ayudarte con tus consultas.',
-            'gracias': 'De nada, estoy aquí para ayudarte. ¿Hay algo más en lo que pueda asistirte?',
-            'adiós': 'Hasta luego. ¡Que tengas un buen día!',
-            'default': 'Interesante pregunta. Permíteme procesar eso. Basado en mi conocimiento, podría decir que...'
-        };
+        // Función para cambiar entre el modo claro y oscuro
+        document.getElementById('toggle-mode').addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            this.textContent = document.body.classList.contains('dark-mode') ? 'Modo Claro' : 'Modo Oscuro';
+        });
 
-        // Diccionario de respuestas específicas para preguntas completas
-        // Cuando el mensaje del usuario coincide exactamente con alguna de estas preguntas, se usa la respuesta correspondiente
-        const specificResponses = {
-            '¿qué es inteligencia artificial?': 'La inteligencia artificial (IA) es la simulación de procesos de inteligencia humana por parte de máquinas, especialmente sistemas informáticos. Estos procesos incluyen el aprendizaje, el razonamiento y la autocorrección.',
-            '¿cómo funciona un asistente virtual?': 'Los asistentes virtuales como yo funcionan mediante algoritmos de procesamiento de lenguaje natural (NLP) que analizan el texto ingresado, identifican la intención del usuario y generan respuestas apropiadas basadas en patrones y datos previamente aprendidos.',
-            '¿qué puedes hacer?': 'Puedo responder preguntas, proporcionar información sobre diversos temas, ayudar con tareas simples como cálculos, y mantener una conversación. Sin embargo, no tengo acceso a internet en tiempo real ni puedo realizar acciones físicas.',
-            '¿quién te creó?': 'Fui creado como parte de un proyecto de demostración para mostrar cómo funciona una interfaz de chat con un asistente virtual.',
-        };
-
-        // Obtener referencias a los elementos del DOM que necesitamos manipular
-        const messagesContainer = document.getElementById('chat-messages');  // Contenedor de mensajes
-        const userInput = document.getElementById('user-input');             // Campo de entrada de texto
-        const sendButton = document.getElementById('send-button');           // Botón de enviar
-        const typingIndicator = document.getElementById('typing-indicator'); // Indicador de escritura
-
-        // Función para añadir un mensaje al chat (tanto del usuario como del bot)
-        function addMessage(text, isUser) {
-            // Crear un nuevo elemento div para el mensaje
-            const messageDiv = document.createElement('div');
-            
-            // Añadir las clases necesarias según si es un mensaje del usuario o del bot
-            messageDiv.classList.add('message');
-            messageDiv.classList.add(isUser ? 'user-message' : 'bot-message');
-            
-            // Establecer el texto del mensaje
-            messageDiv.textContent = text;
-            
-            // Insertar el mensaje antes del indicador de escritura
-            // (esto asegura que el indicador siempre sea el último elemento)
-            messagesContainer.insertBefore(messageDiv, typingIndicator);
-            
-            // Hacer scroll hasta el final del contenedor para mostrar el mensaje más reciente
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        // Función para mostrar el indicador de escritura (cuando el bot está "pensando")
-        function showTyping() {
-            typingIndicator.style.display = 'block';  // Hacer visible el indicador
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;  // Scroll al final
-        }
-
-        // Función para ocultar el indicador de escritura (cuando el bot ha respondido)
-        function hideTyping() {
-            typingIndicator.style.display = 'none';  // Ocultar el indicador
-        }
-
-        // Función principal para procesar la entrada del usuario
-        function processUserInput() {
-            // Obtener el texto escrito por el usuario y eliminar espacios en blanco
-            const userText = userInput.value.trim();
-            
-            // Si el campo está vacío, no hacer nada
-            if (userText === '') return;
-            
-            // Agregar el mensaje del usuario al chat
-            addMessage(userText, true);
-            
-            // Limpiar el campo de entrada
-            userInput.value = '';
-            
-            // Mostrar indicador de escritura (simular que el bot está "pensando")
-            showTyping();
-            
-            // Simular tiempo de procesamiento (1.5 segundos)
-            setTimeout(() => {
-                // Variable para almacenar la respuesta
-                let response;
-                
-                // Convertir el texto del usuario a minúsculas para facilitar la comparación
-                const normalizedInput = userText.toLowerCase();
-                
-                // Primero buscar en respuestas específicas exactas
-                if (specificResponses[normalizedInput]) {
-                    response = specificResponses[normalizedInput];
-                } else {
-                    // Si no hay respuesta específica, buscar palabras clave
-                    let foundKeyword = false;
-                    
-                    // Recorrer todas las palabras clave
-                    for (const keyword in responses) {
-                        // Verificar si el mensaje contiene la palabra clave
-                        if (normalizedInput.includes(keyword)) {
-                            response = responses[keyword];
-                            foundKeyword = true;
-                            break;  // Salir del bucle cuando encuentra la primera coincidencia
-                        }
-                    }
-                    
-                    // Si no se encontró ninguna palabra clave, usar respuestas predeterminadas
-                    if (!foundKeyword) {
-                        // Array de posibles respuestas genéricas
-                        const defaultResponses = [
-                            // Incluyendo parte del texto del usuario para personalizar la respuesta
-                            `Sobre "${userText.substring(0, 30)}${userText.length > 30 ? '...' : ''}", puedo decirte que esta es una pregunta interesante. Basado en mi conocimiento, podría sugerir que explores más sobre este tema.`,
-                            `He analizado tu pregunta sobre "${userText.substring(0, 25)}${userText.length > 25 ? '...' : ''}". Esta es un área que requiere consideración. Si tienes una pregunta más específica, intentaré ayudarte mejor.`,
-                            `Tu consulta es interesante. Para responder adecuadamente sobre "${userText.substring(0, 20)}${userText.length > 20 ? '...' : ''}", necesitaría más contexto. ¿Podrías proporcionar más detalles?`
-                        ];
-                        
-                        // Elegir una respuesta aleatoria del array
-                        response = defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
-                    }
-                }
-                
-                // Ocultar el indicador de escritura y mostrar la respuesta
-                hideTyping();
-                addMessage(response, false);
-            }, 1500); // Tiempo de espera de 1.5 segundos
-        }
-
-        // Configurar event listeners para interacción del usuario
-        
-        // Cuando se hace clic en el botón de enviar
-        sendButton.addEventListener('click', processUserInput);
-        
-        // Cuando se presiona Enter en el campo de entrada
-        userInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                processUserInput();
+        // Función para enviar el mensaje del usuario
+        document.getElementById('send-button').addEventListener('click', function() {
+            const userInput = document.getElementById('user-input').value.trim();
+            if (userInput) {
+                sendMessage(userInput);
+                document.getElementById('user-input').value = '';
             }
         });
 
-        // Al cargar la página, poner el foco en el campo de entrada
-        window.onload = () => {
-            userInput.focus();
-        };
+        // Función para enviar el mensaje del usuario y mostrar el indicador de escritura
+        function sendMessage(message) {
+            const chatMessages = document.getElementById('chat-messages');
+            const userMessageElement = document.createElement('div');
+            userMessageElement.classList.add('message', 'user-message');
+            userMessageElement.textContent = message;
+            chatMessages.appendChild(userMessageElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            showTypingIndicator();
+
+            // Simulación de respuesta del bot
+            setTimeout(() => {
+                hideTypingIndicator();
+                receiveMessage(message);
+            }, 1000);
+        }
+
+        // Función para mostrar el indicador de escritura
+        function showTypingIndicator() {
+            document.getElementById('typing-indicator').style.display = 'flex';
+        }
+
+        // Función para ocultar el indicador de escritura
+        function hideTypingIndicator() {
+            document.getElementById('typing-indicator').style.display = 'none';
+        }
+
+        // Función para recibir la respuesta del bot
+        function receiveMessage(message) {
+            const chatMessages = document.getElementById('chat-messages');
+            const botMessageElement = document.createElement('div');
+            botMessageElement.classList.add('message', 'bot-message');
+            botMessageElement.textContent = `Respuesta del bot a: ${message}`;
+            chatMessages.appendChild(botMessageElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
     </script>
 </body>
 </html>
