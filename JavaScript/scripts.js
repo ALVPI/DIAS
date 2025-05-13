@@ -1,5 +1,5 @@
 // ⚠️ Reemplaza esto con tu clave codificada en Base64
-const encodedKey = "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"; // Ejemplo ficticio
+const encodedKey = "c2stcHJvai1Ya0VicVo1VnRXOV80WU90c0lhT1JSU3FrMFhaNkxfTldnZ2dZZkh0aVRyUFpXSXN6ZU14dWxKYjRjNkkxWm5XMjlUSXN3a1lMSVQzQmxia0ZKQmpBSWx6RGd2Yk5Ca2NYRWt6MVhhaHRPRFpOMkR3c2RFOUZKdWoyWkd2WjdLU0k2MWVBQkRhdEduRDZJZGxLcHJYci1WTjJ4OEE="; // Ejemplo ficticio
 
 const promptInput = document.getElementById("prompt");
 const respuestaDiv = document.getElementById("respuesta");
