@@ -5,10 +5,10 @@ async function enviarPrompt() {
   const respuestaDiv = document.getElementById('respuesta');
   respuestaDiv.textContent = 'Cargando...';
 
-  const apiKey = ''; // ⚠️ No poner esto en producción sin proxy seguro
+  const apiKey = 'sk-30fe2479660c4df0b6a30b77a813ef12'; // ⚠️ No poner esto en producción sin proxy seguro
 
   try {
-    const res = await fetch("https://api.openai.com/v1/chat/completions", {
+    const res = await fetch("https://api.deepseek.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
