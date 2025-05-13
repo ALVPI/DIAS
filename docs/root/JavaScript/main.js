@@ -1,4 +1,3 @@
-const BACKEND_URL = 'https://backendfuncional.onrender.com'; // URL pública de tu backend
 
 // Modo claro/oscuro
 document.getElementById('toggle-mode').addEventListener('click', function(event) {
