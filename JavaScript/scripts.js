@@ -2,7 +2,7 @@ async function enviarPrompt() {
   const respuestaDiv = document.getElementById('respuesta');
   respuestaDiv.textContent = 'Cargando...';
 
-  const apiKey = "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"; // Pega aquí tu token
+  const apiKey = "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"; // Pega aquí tu token
 
   try {
     await fetch("https://openrouter.ai/api/v1/chat/completions", {
