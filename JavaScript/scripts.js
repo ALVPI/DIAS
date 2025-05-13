@@ -1,4 +1,4 @@
-const encodedKey = ""; // ← pega tu clave codificada aquí (en Base64)
+const encodedKey = "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"; // ← pega tu clave codificada aquí (en Base64)
 const promptInput = document.getElementById("prompt");
 const respuestaDiv = document.getElementById("respuesta");
 
