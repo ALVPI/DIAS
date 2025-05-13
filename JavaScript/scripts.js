@@ -5,16 +5,16 @@ async function enviarPrompt() {
   const respuestaDiv = document.getElementById('respuesta');
   respuestaDiv.textContent = 'Cargando...';
 
-  const apiKey = "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"; // Pega aquí tu token
+  const apiKey = "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"; // Pega aquí tu token
 
   try {
     const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${apiKey}`,
-        "HTTP-Referer": "https://tuusuario.github.io", // opcional, puede dejarse
-        "X-Title": "Wrapped demo"
+         "Content-Type": "application/json",
+          "Authorization": `Bearer ${apiKey}`,
+          "HTTP-Referer": "https://tuusuario.github.io",
+          "X-Title": "Wrapped demo"
       },
       body: JSON.stringify({
         model: "opengvlab/internvl3-14b:free",
