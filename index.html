@@ -1,46 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asistente Virtual</title>
-    <base href="/DIAS/" />
-    <link rel="stylesheet" href="CSS/style.css">
+  <meta charset="UTF-8">
+  <title>Mini ChatGPT Prompt</title>
+  <link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Asistente Virtual</h1>
-        <p>Haz cualquier pregunta y nuestro asistente te responderá.</p>
-        
-        <!-- Botón para cambiar el modo -->
-        <button id="toggle-mode">Modo Oscuro</button>
-        
-        <div class="chat-container">
-            <div class="chat-header">
-                Conversación con el Asistente
-            </div>
-            <div class="chat-messages" id="chat-messages">
-                <!-- Mensaje inicial del bot -->
-                <div class="message bot-message">
-                    Hola, soy tu asistente virtual. ¿En qué puedo ayudarte hoy?
-                </div>
-                <!-- Indicador de escritura (tres puntos animados) -->
-                <div class="typing-indicator" id="typing-indicator">
-                    <div class="typing-dots">
-                        <span class="typing-dot"></span>
-                        <span class="typing-dot"></span>
-                        <span class="typing-dot"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="input-area">
-                <input type="text" id="user-input" placeholder="Escribe tu pregunta aquí..." autocomplete="off">
-                <button id="send-button">Enviar</button>
-                <div id="suggestions" class="suggestions"></div>
-            </div>
-        </div>
-    </div>
-
-    <script src="JavaScript/main.js"></script>
+  <div class="container">
+    <h1>ChatGPT Prompt Tester</h1>
+    
+    <button id="toggle-mode">🌙 Modo oscuro</button>
+    
+    <textarea id="prompt" placeholder="Escribe tu prompt aquí... (Shift+Enter para saltos de línea)"></textarea>
+    <button onclick="enviarPrompt()">Enviar</button>
+    
+    <div id="respuesta"></div>
+  </div>
+  <script src="/JavaScript/scripts.js"></script>
 </body>
 </html>
