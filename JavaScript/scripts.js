@@ -1,58 +1,41 @@
 async function enviarPrompt() {
-  const respuestaDiv = document.getElementById('respuesta');
-  const promptInput = document.getElementById('prompt');
-  const prompt = promptInput.value.trim();
+  const prompt = document.getElementById("prompt").value.trim();
+  const respuestaDiv = document.getElementById("respuesta");
+  respuestaDiv.textContent = "Cargando...";
 
-  if (!prompt) {
-    respuestaDiv.textContent = "⚠️ Por favor, escribe un mensaje.";
-    return;
-  }
-
-  respuestaDiv.textContent = 'Cargando...';
-
-  // 🔒 IMPORTANTE: Si esto es público, usa un backend para proteger tu API Key.
-  const apiKey = "sk-30fe2479660c4df0b6a30b77a813ef12"; // Reemplaza con tu API Key real
-  const API_URL = "https://api.deepseek.com/v1/chat/completions"; // Endpoint de DeepSeek
+  const apiKey = "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";  // ← Pega aquí tu API key real
 
   try {
-    const response = await fetch(API_URL, {
+    const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${apiKey}`,
+        "HTTP-Referer": "https://tupagina.github.io",  // opcional
+        "X-Title": "Demo Chat IA"                      // opcional
       },
       body: JSON.stringify({
-        model: "deepseek-chat", // Modelo de DeepSeek
-        messages: [{ role: "user", content: prompt }],
-        max_tokens: 150, // Opcional: limita la respuesta
-      }),
+        model: "deepseek/deepseek-prover-v2:free",
+        messages: [
+          { role: "user", content: prompt }
+        ]
+      })
     });
 
-    const data = await response.json();
+    const data = await res.json();
 
     if (data.choices?.[0]?.message?.content) {
       respuestaDiv.textContent = data.choices[0].message.content;
     } else if (data.error?.message) {
       respuestaDiv.textContent = "⚠️ Error: " + data.error.message;
+      console.error(data);
     } else {
-      respuestaDiv.textContent = "⚠️ Respuesta inesperada de la API.";
+      respuestaDiv.textContent = "⚠️ Error desconocido.";
+      console.error(data);
     }
-  } catch (error) {
-    respuestaDiv.textContent = "❌ Error al conectar con la API.";
-    console.error("Error:", error);
+
+  } catch (err) {
+    respuestaDiv.textContent = "❌ Error al conectar con OpenRouter.";
+    console.error(err);
   }
 }
-
-// Enviar con Enter (Shift+Enter para salto de línea)
-document.getElementById('prompt').addEventListener('keydown', function (e) {
-  if (e.key === 'Enter' && !e.shiftKey) {
-    e.preventDefault();
-    enviarPrompt();
-  }
-});
-
-// Modo oscuro/claro (opcional)
-document.getElementById('toggle-mode').addEventListener('click', function () {
-  document.body.classList.toggle('dark');
-  this.textContent = document.body.classList.contains('dark') ? '☀️ Modo claro' : '🌙 Modo oscuro';
-});
