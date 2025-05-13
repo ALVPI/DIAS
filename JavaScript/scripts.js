@@ -1,4 +1,4 @@
- import { apiKey } from "./secreto.js";
+
 async function enviarPrompt() {
   const prompt = document.getElementById("prompt").value;
   const respuestaDiv = document.getElementById("respuesta");
