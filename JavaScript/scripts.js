@@ -51,6 +51,8 @@ promptInput.addEventListener("keydown", function (e) {
     enviarPrompt();
   }
 });
+document.getElementById("enviar-btn").addEventListener("click", enviarPrompt);
+
 
 // Alternar modo oscuro
 document.getElementById("toggle-mode").addEventListener("click", () => {
