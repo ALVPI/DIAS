@@ -8,19 +8,19 @@ async function enviarPrompt() {
   const apiKey = "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"; // Pega aquí tu token
 
   try {
-    const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-      method: "POST",
-      headers: {
-         "Content-Type": "application/json",
-          "Authorization": `Bearer ${apiKey}`,
-          "HTTP-Referer": "https://tuusuario.github.io",
-          "X-Title": "Wrapped demo"
-      },
-      body: JSON.stringify({
-        model: "opengvlab/internvl3-14b:free",
-        messages: [{ role: "user", content: prompt }],
-      }),
-    });
+    await fetch("https://openrouter.ai/api/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${apiKey}`,
+      "HTTP-Referer": "https://tupagina.github.io",
+      "X-Title": "Wrapped demo"
+    },
+    body: JSON.stringify({
+      model: "opengvlab/internvl3-14b:free",
+      messages: [{ role: "user", content: prompt }]
+    }),
+  });
 
     const data = await res.json();
 
