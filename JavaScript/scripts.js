@@ -1,10 +1,11 @@
+ import { apiKey } from "./secreto.js";
+
+// usar fetch con ese apiKey
+
 async function enviarPrompt() {
   const prompt = document.getElementById("prompt").value;
   const respuestaDiv = document.getElementById("respuesta");
   respuestaDiv.textContent = "Cargando...";
-
-  const apiKey = " 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"; // tu API key real de OpenAI
-
   const response = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {
