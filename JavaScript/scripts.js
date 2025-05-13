@@ -43,7 +43,7 @@ async function enviarPrompt() {
     console.error(err);
   }
 }
-
+document.getElementById("enviar-btn").addEventListener("click", enviarPrompt);
 // Enviar con Enter
 promptInput.addEventListener("keydown", function (e) {
   if (e.key === "Enter" && !e.shiftKey) {
@@ -51,7 +51,7 @@ promptInput.addEventListener("keydown", function (e) {
     enviarPrompt();
   }
 });
-document.getElementById("enviar-btn").addEventListener("click", enviarPrompt);
+
 
 
 // Alternar modo oscuro
