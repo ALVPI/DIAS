@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Mini ChatGPT Prompt</title>
-  <link rel="stylesheet" href="CSS/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChatGPT Prompt Tester</title>
+  <link rel="stylesheet" href="CSS/style.css" />
 </head>
 <body>
+  <button id="toggle-mode">🌙 Modo oscuro</button>
   <div class="container">
     <h1>ChatGPT Prompt Tester</h1>
-    
-    <button id="toggle-mode">🌙 Modo oscuro</button>
-    
-    <textarea id="prompt" placeholder="Escribe tu prompt aquí... (Shift+Enter para saltos de línea)"></textarea>
-    <button onclick="enviarPrompt()">Enviar</button>
-    
+
+    <label for="prompt" class="hint">Pulsa Enter para enviar. Shift+Enter para saltos de línea.</label>
+    <textarea id="prompt" placeholder="Escribe tu prompt aquí..."></textarea>
+
+    <button id="enviar-btn">Enviar</button>
+
     <div id="respuesta"></div>
   </div>
+
   <script src="JavaScript/scripts.js"></script>
 </body>
 </html>
