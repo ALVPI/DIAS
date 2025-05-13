@@ -1,4 +1,4 @@
-const BACKEND_URL = 'https://dias-backend.onrender.com/chat'; // URL pública de tu backend
+const BACKEND_URL = 'https://backendfuncional.onrender.com'; // URL pública de tu backend
 
 // Modo claro/oscuro
 document.getElementById('toggle-mode').addEventListener('click', function(event) {
