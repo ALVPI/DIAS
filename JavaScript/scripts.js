@@ -1,7 +1,4 @@
 async function enviarPrompt() {
-  const prompt = document.getElementById('prompt').value.trim();
-  if (!prompt) return;
-
   const respuestaDiv = document.getElementById('respuesta');
   respuestaDiv.textContent = 'Cargando...';
 
