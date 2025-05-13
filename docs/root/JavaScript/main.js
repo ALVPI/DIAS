@@ -1,14 +1,14 @@
-const BACKEND_URL = 'https://dias-backend-rmrm.onrender.com';
+const BACKEND_URL = 'https://dias-backend.onrender.com/chat'; // URL pública de tu backend
 
 // Modo claro/oscuro
 document.getElementById('toggle-mode').addEventListener('click', function(event) {
     document.body.classList.toggle('dark-mode');
     this.textContent = document.body.classList.contains('dark-mode') ? 'Modo Claro' : 'Modo Oscuro';
-    event.stopPropagation();
+    event.stopPropagation(); // Evita que el evento de clic se propague
 });
 
 // Enviar mensaje con botón
-document.getElementById('send-button').addEventListener('click', () => {
+document.getElementById('send-button').addEventListener('click', async () => {
     const input = document.getElementById('user-input');
     const userInput = input.value.trim();
     if (userInput) {
@@ -26,14 +26,14 @@ document.getElementById('user-input').addEventListener('keypress', (event) => {
             sendMessage(userInput);
             input.value = '';
         }
-        event.preventDefault();
+        event.preventDefault(); // Evita que se envíe el formulario
     }
 });
 
 async function sendMessage(message) {
     const chatMessages = document.getElementById('chat-messages');
     
-    // Muestra mensaje del usuario
+    // Muestra el mensaje del usuario
     const userMessageElement = document.createElement('div');
     userMessageElement.classList.add('message', 'user-message');
     userMessageElement.textContent = message;
@@ -43,6 +43,7 @@ async function sendMessage(message) {
     showTypingIndicator();
 
     try {
+        // Hacer la solicitud al backend
         const response = await fetch(BACKEND_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
