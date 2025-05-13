@@ -5,26 +5,36 @@ async function enviarPrompt() {
   const respuestaDiv = document.getElementById('respuesta');
   respuestaDiv.textContent = 'Cargando...';
 
-  const apiKey = 'sk-30fe2479660c4df0b6a30b77a813ef12'; // ⚠️ No poner esto en producción sin proxy seguro
+  const apiKey = "sk-openrouter-..."; // Pega aquí tu token
 
   try {
-    const res = await fetch("https://api.deepseek.com/v1/chat/completions", {
+    const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${apiKey}`
+        "Authorization": `Bearer ${apiKey}`,
+        "HTTP-Referer": "https://tuusuario.github.io", // opcional, puede dejarse
+        "X-Title": "Wrapped demo"
       },
       body: JSON.stringify({
-        model: "gpt-3.5-turbo",
+        model: "opengvlab/internvl3-14b:free",
         messages: [{ role: "user", content: prompt }],
       }),
     });
 
     const data = await res.json();
-    const respuesta = data.choices?.[0]?.message?.content || 'Error en la respuesta';
-    respuestaDiv.textContent = respuesta;
-  } catch (err) {
-    respuestaDiv.textContent = 'Error de conexión o clave incorrecta.';
+
+    if (data.choices?.[0]?.message?.content) {
+      respuestaDiv.textContent = data.choices[0].message.content;
+    } else if (data.error?.message) {
+      respuestaDiv.textContent = "⚠️ Error: " + data.error.message;
+    } else {
+      respuestaDiv.textContent = "⚠️ Error desconocido.";
+    }
+
+  } catch (error) {
+    respuestaDiv.textContent = "❌ Error al conectar con la API.";
+    console.error(error);
   }
 }
 
