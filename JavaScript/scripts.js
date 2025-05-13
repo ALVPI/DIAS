@@ -1,4 +1,4 @@
-const encodedKey = "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"; // ← pega tu clave codificada aquí (en Base64)
+const apiKey = "c932a3cd19bcef4fa6e443817b9e5d3e80cfbaf729af491880a0bc6c423b6fce"; // <-- pega aquí tu clave de https://together.ai/settings/api-keys
 const promptInput = document.getElementById("prompt");
 const respuestaDiv = document.getElementById("respuesta");
 
@@ -12,16 +12,14 @@ async function enviarPrompt() {
   respuestaDiv.textContent = "⏳ Generando respuesta...";
 
   try {
-    const apiKey = atob(encodedKey); // decodifica la clave
-
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    const response = await fetch("https://api.together.xyz/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        model: "gpt-3.5-turbo",
+        model: "mistralai/Mixtral-8x7B-Instruct-v0.1",
         messages: [{ role: "user", content: prompt }]
       })
     });
@@ -32,6 +30,7 @@ async function enviarPrompt() {
       respuestaDiv.textContent = data.choices[0].message.content;
     } else {
       respuestaDiv.textContent = "⚠️ Error: " + (data.error?.message || "Respuesta vacía.");
+      console.error(data);
     }
   } catch (err) {
     console.error(err);
