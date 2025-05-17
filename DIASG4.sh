@@ -10,4 +10,4 @@ sleep 2
 echo "✅ Iniciando backend Flask (app.py)..."
 # Ejecuta el backend
 cd Backend
-python3 app.py
+python3 ollamaLocal.py

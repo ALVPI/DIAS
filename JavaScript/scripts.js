@@ -1,27 +1,53 @@
 const promptInput = document.getElementById("prompt");
 const respuestaDiv = document.getElementById("respuesta");
+const modeloSelect = document.getElementById("modelo");
 
-// Función principal: hace la petición a Ollama en local
 async function enviarPrompt() {
-  const prompt = document.getElementById("prompt").value.trim();
-  const respuestaDiv = document.getElementById("respuesta");
+  const prompt = promptInput.value.trim();
+  const modelo = modeloSelect.value;
 
   if (!prompt) {
-    respuestaDiv.textContent = "⚠️ Escribe algo antes de enviar.";
+    respuestaDiv.textContent = "⚠️ Escribe un prompt.";
     return;
   }
 
   respuestaDiv.textContent = "⏳ Generando respuesta...";
 
   try {
-    const response = await fetch("http://localhost:5001/api/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ prompt })
-    });
+    if (modelo === "ollama") {
+      // Llama al backend local que usa Ollama
+      const res = await fetch("http://localhost:5001/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt })
+      });
 
-    const data = await response.json();
-    respuestaDiv.textContent = data.response || "❌ Respuesta vacía.";
+      const data = await res.json();
+      respuestaDiv.textContent = data.response || "❌ Sin respuesta válida de Ollama.";
+
+    } else if (modelo === "huggingface") {
+      // Llama al backend Hugging Face para generar una imagen
+      const res = await fetch("http://localhost:5002/api/generate-image", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt })
+      });
+
+      const data = await res.json();
+      if (data.image) {
+        const img = document.createElement("img");
+        img.src = `data:image/png;base64,${data.image}`;
+        img.alt = "Imagen generada";
+        img.style.maxWidth = "100%";
+        respuestaDiv.innerHTML = "";
+        respuestaDiv.appendChild(img);
+      } else {
+        respuestaDiv.textContent = "❌ No se pudo generar la imagen.";
+      }
+    }
+
+    // Limpia el prompt tras generar respuesta
+    promptInput.value = "";
 
   } catch (err) {
     console.error(err);
@@ -29,13 +55,6 @@ async function enviarPrompt() {
   }
 }
 
-// ⌨️ Envío con Enter (sin perder Shift+Enter)
-promptInput.addEventListener("keydown", function (e) {
-  if (e.key === "Enter" && !e.shiftKey) {
-    e.preventDefault();
-    enviarPrompt();
-  }
-});
 
 // 🖱️ Envío con botón
 document.getElementById("enviar-btn").addEventListener("click", enviarPrompt);
