@@ -4,6 +4,8 @@
 
 Frontend para un wrapped a ChatGPT que permitirá realizar consultas e imágenes.
 
+> **Disclaimer**: El código de la rama `Frontend` está diseñado para ejecutarse exclusivamente en local y no está optimizado para entornos de producción.
+
 ## Instalación de Ollama y el Modelo Mistral
 
 Este repositorio proporciona instrucciones detalladas para instalar Ollama y el modelo Mistral en diferentes sistemas operativos.
