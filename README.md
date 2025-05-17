@@ -60,3 +60,6 @@ ollama version
 # Descargar el modelo Mistral
 ollama pull mistral
 ```
+
+#Ejecución
+Para poder ejecutar la aplicación, ejecuta el script en tu sistema y abre el index.html para poder realizar consultas a Mistral.
