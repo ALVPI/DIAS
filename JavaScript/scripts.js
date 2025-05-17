@@ -26,24 +26,25 @@ async function enviarPrompt() {
       respuestaDiv.textContent = data.response || "❌ Sin respuesta válida de Ollama.";
 
     } else if (modelo === "minigpt") {
-      // Llama al backend Hugging Face para generar una imagen
-      const res = await fetch("http://localhost:5002/api/generate-image", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt })
-      });
-
-      const data = await res.json();
-      if (data.image) {
-        const img = document.createElement("img");
-        img.src = `data:image/png;base64,${data.image}`;
-        img.alt = "Imagen generada";
-        img.style.maxWidth = "100%";
-        respuestaDiv.innerHTML = "";
-        respuestaDiv.appendChild(img);
-      } else {
-        respuestaDiv.textContent = "❌ No se pudo generar la imagen.";
+      const imagenInput = document.getElementById("imagen");
+      if (!imagenInput.files[0]) {
+        respuestaDiv.textContent = "⚠️ Sube una imagen.";
+        return;
       }
+      // Leer imagen como base64
+      const reader = new FileReader();
+      reader.onload = async function(e) {
+        const imageB64 = e.target.result.split(",")[1];
+        const res = await fetch("http://localhost:5003/api/minigpt", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt, image: imageB64 })
+        });
+        const data = await res.json();
+        respuestaDiv.textContent = data.response || JSON.stringify(data);
+      };
+      reader.readAsDataURL(imagenInput.files[0]);
+      return; // Salir para evitar limpiar el prompt antes de tiempo
     }
 
     // Limpia el prompt tras generar respuesta
