@@ -12,20 +12,29 @@ def usar_minigpt4():
     prompt = data.get("prompt", "")
     image_b64 = data.get("image", "")
 
-    if not prompt or not image_b64:
-        return jsonify({"error": "Faltan datos"}), 400
-
-    # Decodificar imagen base64
-    image_bytes = base64.b64decode(image_b64)
-    files = {"image": ("image.png", image_bytes, "image/png")}
-    data = {"prompt": prompt}
+    if not prompt:
+        return jsonify({"error": "Falta el prompt"}), 400
 
     try:
-        res = requests.post(
-            "https://camenduru-minigpt4.hf.space/api/predict",
-            files=files,
-            data=data
-        )
+        if image_b64:
+            # Si hay imagen, la enviamos junto al prompt
+            image_bytes = base64.b64decode(image_b64)
+            files = {"image": ("image.png", image_bytes, "image/png")}
+            payload = {"prompt": prompt}
+            res = requests.post(
+                "https://camenduru-minigpt4.hf.space/api/predict",
+                files=files,
+                data=payload
+            )
+        else:
+            # Solo prompt, sin imagen
+            payload = {"prompt": prompt}
+            res = requests.post(
+                "https://camenduru-minigpt4.hf.space/api/predict",
+                data=payload
+            )
+            print("STATUS:", res.status_code)
+            print("RESPUESTA:", res.text)  # <-- Añade esto
         respuesta = res.json()
         return jsonify(respuesta)
 

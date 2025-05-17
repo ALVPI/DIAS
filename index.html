@@ -15,7 +15,7 @@
         <label for="modelo">Modelo:</label>
         <select id="modelo">
           <option value="ollama">Ollama (local)</option>
-          <option value="huggingface">Hugging Face (imagen)</option>
+          <option value="minigpt">MiniGPT4(imagen)</option>
         </select>
       </div>
     </div>
@@ -24,6 +24,8 @@
     <textarea id="prompt" placeholder="Escribe tu prompt aquí..."></textarea>
 
     <button id="enviar-btn">Enviar</button>
+
+    <input type="file" id="imagen" accept="image/*" style="display:none; margin-top:1rem;">
 
     <div id="respuesta"></div>
   </div>

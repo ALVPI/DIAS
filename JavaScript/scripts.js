@@ -27,24 +27,36 @@ async function enviarPrompt() {
 
     } else if (modelo === "minigpt") {
       const imagenInput = document.getElementById("imagen");
-      if (!imagenInput.files[0]) {
-        respuestaDiv.textContent = "⚠️ Sube una imagen.";
+      if (imagenInput.files[0]) {
+        // Si hay imagen, la leemos como base64 y la enviamos
+        const reader = new FileReader();
+        reader.onload = async function(e) {
+          const imageB64 = e.target.result.split(",")[1];
+          const res = await fetch("http://localhost:5003/api/minigpt", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ prompt, image: imageB64 })
+          });
+          const data = await res.json();
+          respuestaDiv.textContent = data.response || JSON.stringify(data);
+          promptInput.value = "";
+          imagenInput.value = "";
+        };
+        reader.readAsDataURL(imagenInput.files[0]);
         return;
-      }
-      // Leer imagen como base64
-      const reader = new FileReader();
-      reader.onload = async function(e) {
-        const imageB64 = e.target.result.split(",")[1];
+      } else {
+        // Si NO hay imagen, solo enviamos el prompt
         const res = await fetch("http://localhost:5003/api/minigpt", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ prompt, image: imageB64 })
+          body: JSON.stringify({ prompt })
         });
         const data = await res.json();
         respuestaDiv.textContent = data.response || JSON.stringify(data);
-      };
-      reader.readAsDataURL(imagenInput.files[0]);
-      return; // Salir para evitar limpiar el prompt antes de tiempo
+        promptInput.value = "";
+        imagenInput.value = "";
+        return;
+      }
     }
 
     // Limpia el prompt tras generar respuesta
@@ -59,8 +71,23 @@ async function enviarPrompt() {
 
 // 🖱️ Envío con botón
 document.getElementById("enviar-btn").addEventListener("click", enviarPrompt);
-
+// ⏎ Envío con Enter
+promptInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    enviarPrompt();
+  }
+});
 // 🌙 Alternar modo oscuro
 document.getElementById("toggle-mode").addEventListener("click", () => {
   document.body.classList.toggle("dark");
+});
+
+modeloSelect.addEventListener("change", () => {
+  const imagenInput = document.getElementById("imagen");
+  if (modeloSelect.value === "minigpt") {
+    imagenInput.style.display = "block";
+  } else {
+    imagenInput.style.display = "none";
+  }
 });
