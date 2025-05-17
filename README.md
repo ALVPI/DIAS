@@ -4,7 +4,7 @@
 
 Frontend para un wrapped a ChatGPT que permitirá realizar consultas e imágenes.
 
-> **Disclaimer**: El código de la rama `Frontend` está diseñado para ejecutarse exclusivamente en local y no está optimizado para entornos de producción.
+> **Disclaimer**: El código de la rama `Frontend` está diseñado para ejecutarse exclusivamente en local, con I/O de texto plano y no está optimizado para entornos de producción.
 
 ## Instalación de Ollama y el Modelo Mistral
 
