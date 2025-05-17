@@ -25,7 +25,7 @@ async function enviarPrompt() {
       const data = await res.json();
       respuestaDiv.textContent = data.response || "❌ Sin respuesta válida de Ollama.";
 
-    } else if (modelo === "huggingface") {
+    } else if (modelo === "minigpt") {
       // Llama al backend Hugging Face para generar una imagen
       const res = await fetch("http://localhost:5002/api/generate-image", {
         method: "POST",
