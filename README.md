@@ -2,7 +2,7 @@
 
 ## Grupo 4
 
-Frontend para un wrapped a ChatGPT que permitirá realizar consultas e imágenes.
+Frontend para un wrapped a Ollama que permitirá realizar consultas texto a texto.
 
 > **Disclaimer**: El código de la rama `Aplicacion` está diseñado para ejecutarse exclusivamente en local, con I/O de texto plano y no está optimizado para entornos de producción.
 
