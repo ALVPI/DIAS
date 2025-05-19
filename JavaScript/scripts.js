@@ -1,10 +1,8 @@
 const promptInput = document.getElementById("prompt");
 const respuestaDiv = document.getElementById("respuesta");
-const modeloSelect = document.getElementById("modelo");
 
 async function enviarPrompt() {
   const prompt = promptInput.value.trim();
-  const modelo = modeloSelect.value;
 
   if (!prompt) {
     respuestaDiv.textContent = "⚠️ Escribe un prompt.";
@@ -13,18 +11,18 @@ async function enviarPrompt() {
 
   respuestaDiv.textContent = "⏳ Esperando respuesta...";
 
- 
-  if (modelo === "ollama") {
+  try {
     const res = await fetch("http://localhost:5001/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ prompt })
     });
     const data = await res.json();
-    respuestaDiv.textContent = data.response || "❌ Sin respuesta de Ollama.";
-  }    
-
-   
+    respuestaDiv.textContent = data.response || data.error || "❌ Sin respuesta de Ollama.";
+  } catch (error) {
+    respuestaDiv.textContent = "❌ Error al conectar con Ollama.";
+  }
+  promptInput.value = "";
 }
 
 document.getElementById("enviar-btn").addEventListener("click", enviarPrompt);
@@ -34,10 +32,10 @@ promptInput.addEventListener("keydown", function (e) {
     enviarPrompt();
   }
 });
+
 // cambiar a modo oscuro
 document.getElementById("toggle-mode").addEventListener("click", () => {
   document.body.classList.toggle("dark");
-  // Guarda la preferencia en localStorage
   localStorage.setItem("modoOscuro", document.body.classList.contains("dark"));
 });
 

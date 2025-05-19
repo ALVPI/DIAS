@@ -2,7 +2,7 @@
 
 echo "✅ Iniciando modelo Mistral con Ollama..."
 # Lanza Ollama solo si no está corriendo
-if ! pgrep -f "ollama run mistral" > /dev/null; then
+if ! pgrep -f "ollama run mistral" >/dev/null; then
     ollama run mistral &
     OLLAMA_PID=$!
     echo "PID de Ollama: $OLLAMA_PID"
@@ -36,8 +36,6 @@ echo "⏳ Esperando a que cierres el navegador (pulsa Enter aquí cuando lo haya
 read
 
 echo "🛑 Cerrando servicios..."
-
-
 
 # Detener Ollama
 if [[ ! -z "$OLLAMA_PID" ]]; then
