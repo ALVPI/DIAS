@@ -13,45 +13,18 @@ async function enviarPrompt() {
 
   respuestaDiv.textContent = "⏳ Esperando respuesta...";
 
-  try {
-    if (modelo === "ollama") {
-      const res = await fetch("http://localhost:5001/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt })
-      });
-      const data = await res.json();
-      respuestaDiv.textContent = data.response || "❌ Sin respuesta de Ollama.";
-    } else if (modelo === "minigpt") {
-      const fileInput = document.getElementById("image");
-      if (!fileInput || !fileInput.files.length) {
-        respuestaDiv.textContent = "⚠️ MiniGPT requiere una imagen.";
-        return;
-      }
+ 
+  if (modelo === "ollama") {
+    const res = await fetch("http://localhost:5001/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt })
+    });
+    const data = await res.json();
+    respuestaDiv.textContent = data.response || "❌ Sin respuesta de Ollama.";
+  }    
 
-      const reader = new FileReader();
-      reader.onload = async function () {
-        const base64Image = reader.result.split(",")[1];
-
-        const res = await fetch("http://localhost:5003/api/minigpt", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ prompt, image: base64Image })
-        });
-
-        const data = await res.json();
-        respuestaDiv.textContent = data?.data?.[0]?.generated_text || "❌ Sin respuesta de MiniGPT.";
-      };
-      reader.readAsDataURL(fileInput.files[0]);
-      return; // salimos para no limpiar el campo aún
-    }
-
-    promptInput.value = "";
-
-  } catch (err) {
-    console.error(err);
-    respuestaDiv.textContent = "❌ Error al conectar con el modelo.";
-  }
+   
 }
 
 document.getElementById("enviar-btn").addEventListener("click", enviarPrompt);
