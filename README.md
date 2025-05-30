@@ -82,14 +82,14 @@ Una vez tengas instalado Ollama y el modelo Mistral siguiendo las instrucciones 
 - **En Windows:**  
   Ejecuta el archivo `.bat` desde la consola:
   ```bash
-  ./nombre_del_script.bat
+  ./DIASG4.bat
   ```
 
 - **En Linux o macOS:**  
-  Dale permisos de ejecución al archivo `.sh` (Empleando chmod 744 para que sólo tu usuario tenga permisos) y ejecútalo:
+  Dale permisos de ejecución al archivo `.sh`  y ejecútalo:
   ```bash
   chmod +x nombre_del_script.sh
-  ./nombre_del_script.sh
+  ./DIASG4.sh
   ```
 4. **Realiza las consultas mediante la aplicación, el tiempo de espera para una consulta oscila entre los 25-40 segundos en función de cuan específica ha de ser la respuesta a la misma.
 
