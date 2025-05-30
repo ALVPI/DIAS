@@ -91,7 +91,8 @@ Una vez tengas instalado Ollama y el modelo Mistral siguiendo las instrucciones 
   chmod +x nombre_del_script.sh
   ./DIASG4.sh
   ```
-4. **Realiza las consultas mediante la aplicación, el tiempo de espera para una consulta oscila entre los 25-40 segundos en función de cuan específica ha de ser la respuesta a la misma.
+4. **Realiza las consultas mediante la aplicación
+    El tiempo de espera para una consulta oscila entre los 25-40 segundos en función de cuan específica ha de ser la respuesta a la misma.
 
 5. **Cierre el navegador y vuelva a la terminal/interprete de comandos desde donde ha lanzado el script. Presione enter para que el mismo se encargue de matar todos los daemos necesarios para la ejecución del código.
 
