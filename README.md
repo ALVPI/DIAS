@@ -61,7 +61,39 @@ ollama version
 ollama pull mistral
 ```
 
-### Ejecución
+## Ejecución de la Aplicación
 
-Para poder ejecutar la aplicación, ejecuta el script en tu sistema y abre el `index.html` para poder realizar consultas a Mistral.
+Una vez tengas instalado Ollama y el modelo Mistral siguiendo las instrucciones anteriores, sigue estos pasos para ejecutar el frontend de este repositorio:
+
+1. **Clona este repositorio (si no lo has hecho):**
+   ```bash
+   git clone https://github.com/ALVPI/DIAS.git
+   cd DIAS
+   ```
+
+2. **Asegúrate de estar en la rama correcta:**
+   > El código funcional se encuentra en la rama `Aplicacion`.
+   ```bash
+   git checkout Aplicacion
+   ```
+3. **Ejecuta el script correspondiente a su OS
+   ## Ejecución del script según tu sistema operativo
+
+- **En Windows:**  
+  Ejecuta el archivo `.bat` desde la consola:
+  ```bash
+  ./nombre_del_script.bat
+  ```
+
+- **En Linux o macOS:**  
+  Dale permisos de ejecución al archivo `.sh` (Empleando chmod 744 para que sólo tu usuario tenga permisos) y ejecútalo:
+  ```bash
+  chmod +x nombre_del_script.sh
+  ./nombre_del_script.sh
+  ```
+4. **Realiza las consultas mediante la aplicación, el tiempo de espera para una consulta oscila entre los 25-40 segundos en función de cuan específica ha de ser la respuesta a la misma.
+
+5. **Cierre el navegador y vuelva a la terminal/interprete de comandos desde donde ha lanzado el script. Presione enter para que el mismo se encargue de matar todos los daemos necesarios para la ejecución del código.
+
+
 
