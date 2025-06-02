@@ -88,7 +88,7 @@ Una vez tengas instalado Ollama y el modelo Mistral siguiendo las instrucciones 
 - **En Linux o macOS:**  
   Dale permisos de ejecución al archivo `.sh`  y ejecútalo:
   ```bash
-  chmod +x nombre_del_script.sh
+  chmod +x DIASG4.sh
   ./DIASG4.sh
   ```
 4. **Realiza las consultas mediante la aplicación:**
